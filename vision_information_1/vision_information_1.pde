@@ -1,9 +1,15 @@
-//confirm the blind spot
-//right-click: circle becomes smaller
-//left-click: circle becomes bigger
+// confirm the blind spot
 
-//up-key: circle moves upper
-//down-key: circle moves downer
+// right-click: circle becomes smaller
+// left-click: circle becomes bigger
+
+// up-key: circle moves upper
+// down-key: circle moves downer
+
+// right-key: circle moves to righter
+// left-key: circle moves to lefter
+
+// enter-key: reset circle's position and size
 
 void setup(){
   size(600, 600);
@@ -13,6 +19,7 @@ void setup(){
 }
 
 int rad = 100;        // radius of circle
+int circle_x = 450;   // x-axis of circle
 int circle_y = 300;   // y-axis of circle
 
 void draw(){
@@ -20,7 +27,7 @@ void draw(){
   
   //draw circle
   strokeWeight(0);
-  ellipse(450, circle_y, rad, rad);
+  ellipse(circle_x, circle_y, rad, rad);
   
   //draw cross by line
   strokeWeight(2);
@@ -45,20 +52,39 @@ void draw(){
 }
 
 
-// circle moves by up or down key
+// circle moves by cross-keys
 void keyPressed(){
   if(key==CODED){
     if(keyCode==UP){
       if(circle_y < 600){
         circle_y -= 1;
+        print("y-axis = ");
+        println(circle_y);
       }
     }
     else if(keyCode==DOWN){
       if(circle_y > 0){
         circle_y += 1;
+        print("y-axis = ");
+        println(circle_y);
       }
     }
-    print("circle y axis = ");
-    println(circle_y);
+    else if(keyCode==RIGHT){
+      circle_x += 1;
+      print("x-axis = ");
+      println(circle_x);
+    }
+    else if(keyCode==LEFT){
+      circle_x -= 1;
+      print("x-axis = ");
+      println(circle_x);
+    }
+  }
+  if(key==ENTER){
+      //reset the circle
+      rad = 100;
+      circle_x = 450;
+      circle_y = 300;
+      println("reset circle");
   }
 }
