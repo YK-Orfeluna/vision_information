@@ -1,17 +1,56 @@
+PrintWriter output;
+
+//int base = 140;
+int[] arr = new int[140];
+
 void setup(){
   size(1200, 800);
   colorMode(RGB, 256);
   background(255, 255, 255);
+  
+  int j = 0;
+  int[] temp = new int[7];
+  
+  float[] arr_rand = new float[7];
+  
+  for(int s=0; s<20; s++){
+    for(int i=0; i<7; i++){
+      arr_rand[i] = random(7);
+    }
+    float arr_rand2[] = sort(arr_rand);
+    
+    for(int i=0; i<7; i++){
+      for(int k=0; k<7; k++){
+        if(arr_rand2[i] == arr_rand[k]){
+          int index = k;
+          temp[i] = index;
+        }
+      }
+    }
+    for(int i=0; i<7; i++){
+      arr[j] = 100 + temp[i] * 5;
+      j += 1;
+    }
+  }
+  println(arr);
+  
+  String filename = "rslt.csv";
+  output = createWriter(filename);
 }
+
+int cnt = 0;
 
 int upper = 150;
 int rad = 100;
-int rad2 = rad;
+int rad2 ;
 
 int circle_x = 750;
 int circle_y = 700;
 
+
 void draw(){
+  rad2 = arr[cnt];
+  
   background(157, 204, 224);
   
   strokeWeight(0);
@@ -43,22 +82,46 @@ void draw(){
   ellipse(circle_x, circle_y, rad2, rad2); 
 }
 
+char flag;
 void keyPressed(){
+  if(key==ENTER){
+    if(cnt<139){
+      cnt += 1;
+      rad2 = arr[cnt];
+      println(cnt, rad2);
+    
+      output.println(rad2+","+flag);
+    }
+  }
+  else if(keyCode==LEFT){
+    flag = 'L';
+  }
+  else if(keyCode==RIGHT){
+    flag = 'R';
+  }
+  else if(key=='q'){
+    output.flush();
+    output.close();
+    exit();
+  }
+  
+  /*
   if(key==CODED){
     if(keyCode==UP){
       rad2 += 5;
-      println(rad2);
+      //println(rad2);
       //circle_x -= 6;
       //circle_y -= 80;
       //println(circle_x, circle_y);
     }
     else if(keyCode==DOWN){
       rad2 -= 5;
-      println(rad2);
+      //println(rad2);
     }
   }
   if(key==ENTER){
     rad2 = rad;
-    println(rad);
+    //println(rad);
   }
+  */
 }
