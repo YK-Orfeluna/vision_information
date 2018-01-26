@@ -82,22 +82,26 @@ void draw(){
   ellipse(circle_x, circle_y, rad2, rad2); 
 }
 
-char flag;
+int flag;
 void keyPressed(){
   if(key==ENTER){
     if(cnt<139){
       cnt += 1;
       rad2 = arr[cnt];
       println(cnt, rad2);
-    
       output.println(rad2+","+flag);
+    }
+    else{
+      output.flush();
+      output.close();
+      exit();
     }
   }
   else if(keyCode==LEFT){
-    flag = 'L';
+    flag = 1;
   }
   else if(keyCode==RIGHT){
-    flag = 'R';
+    flag = 0;
   }
   else if(key=='q'){
     output.flush();
