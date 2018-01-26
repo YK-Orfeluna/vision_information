@@ -5,9 +5,10 @@ void setup(){
 }
 
 int upper = 150;
-int rad = 85;
+int rad = 100;
+int rad2 = rad;
 
-int circle_x = 700;
+int circle_x = 750;
 int circle_y = 700;
 
 void draw(){
@@ -37,14 +38,27 @@ void draw(){
   fill(255, 0, 0);
   
   //base circle
-  ellipse(545, 200, rad, rad);
+  ellipse(538, 220, rad, rad);
 
-  ellipse(circle_x, circle_y, rad, rad); 
+  ellipse(circle_x, circle_y, rad2, rad2); 
 }
 
 void keyPressed(){
+  if(key==CODED){
+    if(keyCode==UP){
+      rad2 += 5;
+      println(rad2);
+      //circle_x -= 6;
+      //circle_y -= 80;
+      //println(circle_x, circle_y);
+    }
+    else if(keyCode==DOWN){
+      rad2 -= 5;
+      println(rad2);
+    }
+  }
   if(key==ENTER){
-    circle_x -= 4;
-    circle_y -= 50;
+    rad2 = rad;
+    println(rad);
   }
 }
