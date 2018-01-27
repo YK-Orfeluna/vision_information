@@ -32,7 +32,7 @@ void setup(){
       }
     }
     for(int i=0; i<7; i++){
-      arr[j] = 100 + temp[i] * 10;
+      arr[j] = 100 + temp[i] * 15;
       j += 1;
     }
   }
@@ -113,7 +113,7 @@ void keyPressed(){
       if(flag!=-1){
         cnt += 1;
         rad2 = arr[cnt];
-        println(cnt, rad2);
+        println(cnt, rad2, flag);
         output.println(rad2 +"," + flag);
         flag = -1;
       }
