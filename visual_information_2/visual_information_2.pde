@@ -36,7 +36,7 @@ void setup(){
       j += 1;
     }
   }
-  println(arr);
+  //println(arr);
   
   // Configuration to write the results to the csv-file
   String filename = "rslt.csv";
@@ -137,7 +137,7 @@ void keyPressed(){
   else if(key=='y'){
     flag = 0;
   }
-  else if(key=='q'){
+  else if((key=='q') || (keyCode==ESC)){
     output.flush();
     output.close();
     println("Saved your results: rslt.csv");
