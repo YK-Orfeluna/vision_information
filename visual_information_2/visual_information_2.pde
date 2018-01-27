@@ -8,6 +8,8 @@ void setup(){
   colorMode(RGB, 256);
   background(255, 255, 255);
   
+  
+  // To make a random array
   int j = 0;
   int[] temp = new int[7];
   
@@ -32,8 +34,9 @@ void setup(){
       j += 1;
     }
   }
-  println(arr);
+  //println(arr);
   
+  // Configuration to write the results to the csv-file
   String filename = "rslt.csv";
   output = createWriter(filename);
 }
@@ -51,6 +54,7 @@ int circle_y = 700;
 void draw(){
   rad2 = arr[cnt];
   
+  //Drawing the backgrond
   background(157, 204, 224);
   
   strokeWeight(0);
@@ -76,24 +80,29 @@ void draw(){
   strokeWeight(2);
   fill(255, 0, 0);
   
-  //base circle
+  // base circle (not move)
   ellipse(538, 220, rad, rad);
-
+  
+  // situmilation circle (moving)
   ellipse(circle_x, circle_y, rad2, rad2); 
 }
 
-int flag;
+int flag = -1;
 void keyPressed(){
   if(key==ENTER){
     if(cnt<139){
-      cnt += 1;
-      rad2 = arr[cnt];
-      println(cnt, rad2);
-      output.println(rad2+","+flag);
+      if(flag!=-1){
+        cnt += 1;
+        rad2 = arr[cnt];
+        println(cnt, rad2);
+        output.println(rad2+","+flag);
+        flag = -1;
+      }
     }
     else{
       output.flush();
       output.close();
+      println("Saved your results: rslt.csv");
       exit();
     }
   }
@@ -106,6 +115,7 @@ void keyPressed(){
   else if(key=='q'){
     output.flush();
     output.close();
+    println("Saved your results: rslt.csv");
     exit();
   }
   
