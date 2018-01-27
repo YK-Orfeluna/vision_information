@@ -32,11 +32,11 @@ void setup(){
       }
     }
     for(int i=0; i<7; i++){
-      arr[j] = 100 + temp[i] * 15;
+      arr[j] = 100 + temp[i] * 10;
       j += 1;
     }
   }
-  //println(arr);
+  println(arr);
   
   // Configuration to write the results to the csv-file
   String filename = "rslt.csv";
@@ -104,6 +104,11 @@ void draw(){
     text("no", text_x+250, text_y+f_size);
     text("エンターキーを押してください", text_x+50, text_y+f_size*2);
   }
+  text(cnt+1, 1000, text_y);
+  
+  // Drawing cross point
+  line(600, 350, 600, 450);
+  line(550, 400, 650, 400);
 }
 
 int flag = -1;
@@ -111,10 +116,11 @@ void keyPressed(){
   if(key==ENTER){
     if(cnt<139){
       if(flag!=-1){
-        cnt += 1;
-        rad2 = arr[cnt];
         println(cnt, rad2, flag);
         output.println(rad2 +"," + flag);
+        
+        cnt += 1;
+        rad2 = arr[cnt];
         flag = -1;
       }
     }
