@@ -4,7 +4,7 @@ import numpy as np
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
-def sigmoid(x, x0, k):
+def logistic(x, x0, k):
 	out = 1 / (1 + np.exp(-k*(x-x0)))
 	return out
 
@@ -23,12 +23,12 @@ xmax = 65
 
 
 # curve fitting
-popt, pcov = curve_fit(sigmoid, x, y)
+popt, pcov = curve_fit(logistic, x, y)
 #print(popt)
 #function  ="1 / (1 + exp(-%.2f*(x-%.2f)" %(popt[1], popt[0])
 #print(function)
 curve_x = np.linspace(0, 60, 60)
-curve_y = sigmoid(curve_x, *popt)
+curve_y = logistic(curve_x, *popt)
 
 
 search_x = np.linspace(0, 60, 500)
