@@ -2,12 +2,14 @@ PrintWriter output;
 
 //int base = 140;
 int[] arr = new int[140];
+int f_size = 30;
 
 void setup(){
   size(1200, 800);
   colorMode(RGB, 256);
   background(255, 255, 255);
   
+  textFont(createFont("MS Gothic", f_size));
   
   // To make a random array
   int j = 0;
@@ -30,7 +32,7 @@ void setup(){
       }
     }
     for(int i=0; i<7; i++){
-      arr[j] = 100 + temp[i] * 5;
+      arr[j] = 100 + temp[i] * 10;
       j += 1;
     }
   }
@@ -85,6 +87,23 @@ void draw(){
   
   // situmilation circle (moving)
   ellipse(circle_x, circle_y, rad2, rad2); 
+  
+  // Drawing text
+  fill(0, 0, 0);
+  int text_x = 350;
+  int text_y = 30;
+  text("右の円は，左の円より，大きいですか？", text_x, text_y);
+  if(flag==-1){
+    text("（y or n）", text_x+200, text_y+f_size);
+  }
+  else if(flag==0){
+    text("yes", text_x+250, text_y+f_size);
+    text("エンターキーを押してください", text_x+50, text_y+f_size*2);
+  }
+  else if(flag==1){
+    text("no", text_x+250, text_y+f_size);
+    text("エンターキーを押してください", text_x+50, text_y+f_size*2);
+  }
 }
 
 int flag = -1;
@@ -95,7 +114,7 @@ void keyPressed(){
         cnt += 1;
         rad2 = arr[cnt];
         println(cnt, rad2);
-        output.println(rad2+","+flag);
+        output.println(rad2 +"," + flag);
         flag = -1;
       }
     }
@@ -106,10 +125,10 @@ void keyPressed(){
       exit();
     }
   }
-  else if(keyCode==LEFT){
+  else if(key=='n'){
     flag = 1;
   }
-  else if(keyCode==RIGHT){
+  else if(key=='y'){
     flag = 0;
   }
   else if(key=='q'){
