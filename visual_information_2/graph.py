@@ -10,11 +10,12 @@ def logistic(x, x0, k):
 
 # distance of radius between base-circle and stimulation-circle (pixel)
 x = np.array([0, 10, 20, 30, 40, 50, 60], dtype=np.uint64)
-xlabel = "distance of radius between base-circle and stimulation-circle (pixel)"
+xlabel = "distance of radius between base-circle and stimulation-circle (pixel): mean & SEM"
 
 # accuracy
 y = np.array([0.00, 0.00, 0.25, 0.80, 1.00, 1.00, 1.00], dtype=np.float64)
-ylabel = "accuracy"
+sem = np.array([0, 0, 0.099339927, 0.091766294, 0, 0, 0], dtype=np.float64)
+ylabel = "mean accuracy"
 
 title = "result of experiment: optical illusion"
 
@@ -35,7 +36,7 @@ search_x = np.linspace(0, 60, 500)
 search_y = 0
 target = 0
 for i in search_x :
-	temp = sigmoid(i, *popt)
+	temp = logistic(i, *popt)
 	if np.abs(0.5-temp) < np.abs(0.5-search_y) :
 		target = i
 		search_y = temp
@@ -47,6 +48,7 @@ for i in search_x :
 plt.figure()
 
 plt.plot(x, y, marker="o", color="blue", label="accuracy")
+plt.errorbar(x,y,yerr=sem,fmt='ro',ecolor='black', capsize=4)
 
 # drawing auxiliary line: y=0.5
 plt.hlines([0.5], xmin, xmax, color="gray", linestyles='dashed', label="auxiliary line: "+r"($y=0.5$)")
