@@ -25,13 +25,13 @@ xmax = 65
 # curve fitting
 popt, pcov = curve_fit(sigmoid, x, y)
 #print(popt)
-function  ="1 / (1 + exp(-%.2f*(x-%.2f)" %(popt[1], popt[0])
+#function  ="1 / (1 + exp(-%.2f*(x-%.2f)" %(popt[1], popt[0])
 #print(function)
 curve_x = np.linspace(0, 60, 60)
 curve_y = sigmoid(curve_x, *popt)
 
 
-search_x = np.linspace(0, 60, 1000)
+search_x = np.linspace(0, 60, 500)
 search_y = 0
 target = 0
 for i in search_x :

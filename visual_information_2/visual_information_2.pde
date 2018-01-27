@@ -113,7 +113,7 @@ void draw(){
 
 int flag = -1;
 void keyPressed(){
-  if(key==ENTER){
+  if(keyCode==ENTER){
     if(cnt<139){
       if(flag!=-1){
         println(cnt, rad2, flag);
@@ -131,13 +131,13 @@ void keyPressed(){
       exit();
     }
   }
-  else if(key=='n'){
+  else if((key=='n') || (key=='N')){
     flag = 1;
   }
-  else if(key=='y'){
+  else if((key=='y') || (key=='Y')){
     flag = 0;
   }
-  else if((key=='q') || (keyCode==ESC)){
+  else if((key=='q') || (key=='Q') || (keyCode==ESC)){
     output.flush();
     output.close();
     println("Saved your results: rslt.csv");
