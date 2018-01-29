@@ -14,11 +14,11 @@ xlabel = "distance of radius between base-circle and stimulation-circle (pixel)"
 
 # accuracy
 y = np.array([0.00, 0.00, 0.25, 0.80, 1.00, 1.00, 1.00], dtype=np.float64)
-#sem = np.array([0, 0, 0.099339927, 0.091766294, 0, 0, 0], dtype=np.float64)
-sem_y = np.array([0.25, 0.80], dtype=np.float64)
-sem_x = np.array([20, 30], dtype=np.uint64)
-sem = np.array([.099339927, 0.091766294], dtype=np.float64)
 ylabel = "mean accuracy"
+
+# standard error of the mean
+sem = np.array([0.0, 0.0, 0.099339927, 0.091766294, 0.0, 0.0, 0.0], dtype=np.float64)
+
 
 title = "result of experiment: optical illusion"
 
@@ -51,7 +51,6 @@ for i in search_x :
 plt.figure()
 
 plt.plot(x, y, marker="o", color="blue")
-plt.errorbar(sem_x, sem_y, fmt="bo", yerr=sem, ecolor='blue', capsize=4, label="accuracy: mean&SEM")
 
 # drawing auxiliary line: y=0.5
 plt.hlines([0.5], xmin, xmax, color="gray", linestyles='dashed', label="auxiliary line: "+r"($y=0.5$)")
@@ -59,19 +58,25 @@ plt.hlines([0.5], xmin, xmax, color="gray", linestyles='dashed', label="auxiliar
 # drawing fitted curve
 plt.plot(curve_x, curve_y, color="red", label="fiiting curve by logistic: "+r"$g(x)$")
 
+# drawing SEM
+plt.errorbar(x[2:4], y[2:4], fmt="bo", yerr=sem[2:4], ecolor='blue', capsize=4, label="accuracy: mean&SEM")
+
+
+# set titles
 plt.xlabel(xlabel)
 plt.ylabel(ylabel)
-
-plt.legend(loc="lower right")
+plt.title(title)
 
 plt.xlim(xmin, xmax)
-
-plt.title(title)
 
 plt.text(45, 0.9, r"$g(x)=\frac{1}{1+\exp^{-k(x-x0)}}$")
 plt.text(45, 0.8, "x0=%s, \nk=%s" %(popt[0], popt[1]), fontsize=8)
 
+# drawing PSE (point of subjective equality)
+plt.plot([target], [0.5], color="lime", marker="D", ms=8, label="Position of Subjective Equality")
 plt.text(13, 0.55, "(%.1f, 0.5)" %target)
+
+plt.legend(loc="lower right")
 
 if 0 :
 	plt.show()
