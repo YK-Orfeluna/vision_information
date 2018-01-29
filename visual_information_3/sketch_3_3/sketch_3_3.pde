@@ -1,5 +1,6 @@
 float[] input = new float[100];
 float[] percept = new float[100];
+float[] temp = new float[100];
 
 int sgn = 1;
 
@@ -36,20 +37,18 @@ void setCOCE(){
 void perceve(){
   for(int i=0; i<100; i++){
     percept[i] = input[i];
+    temp[i] = input[i];
   }
 }
 
 void updatePersept(){
   for(int i=1; i<99; i++){
-    if(i==0){
-      percept[i] = (percept[i] + percept[i+1]) / 2;
+    if((abs(percept[i]-percept[i+1]) < 15) && (abs(percept[i-1] - percept[i]) < 15)){
+      temp[i] = (percept[i-1] + percept[i] + percept[i+1]) / 3;
     }
-    else if(i==99){
-      percept[i] = (percept[i-1] + percept[i]) / 2;
-    }
-    else if((abs(percept[i]-percept[i+1]) < 15) && (abs(percept[i-1] - percept[i]) < 15)){
-      percept[i] = (percept[i-1] + percept[i] + percept[i+1]) / 3;
-    }
+  }
+  for(int i=0; i<100; i++){
+    percept[i] = temp[i];
   }
 }
 
