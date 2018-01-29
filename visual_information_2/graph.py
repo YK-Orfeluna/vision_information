@@ -47,8 +47,8 @@ for i in search_x :
 
 plt.figure()
 
-plt.plot(x, y, marker="o", color="blue", label="accuracy: mean & SEM")
-plt.errorbar(x,y,yerr=sem,fmt='ro',ecolor='blue', capsize=4)
+plt.plot(x, y, marker="o", color="blue")
+plt.errorbar(x, y, fmt="b", yerr=sem, ecolor='blue', capsize=4, label="accuracy: mean&SEM")
 
 # drawing auxiliary line: y=0.5
 plt.hlines([0.5], xmin, xmax, color="gray", linestyles='dashed', label="auxiliary line: "+r"($y=0.5$)")
@@ -70,7 +70,7 @@ plt.text(45, 0.8, "x0=%s, \nk=%s" %(popt[0], popt[1]), fontsize=8)
 
 plt.text(13, 0.55, "(%.1f, 0.5)" %target)
 
-if 0 :
+if 1 :
 	plt.show()
 else :
 	plt.savefig("rslt.png", dpi=300)
