@@ -1,7 +1,6 @@
 float[] input = new float[100];
 float[] percept = new float[100];
 float[] temp = new float[100];
-
 int sgn = 1;
 
 void setPlateau(){
@@ -34,6 +33,7 @@ void setCOCE(){
   }
 }
 
+// set percept-value
 void perceve(){
   for(int i=0; i<100; i++){
     percept[i] = input[i];
@@ -41,6 +41,7 @@ void perceve(){
   }
 }
 
+// update persept value
 void updatePersept(){
   for(int i=1; i<99; i++){
     if((abs(percept[i]-percept[i+1]) < 15) && (abs(percept[i-1] - percept[i]) < 15)){
@@ -71,6 +72,7 @@ void draw(){
   background(192);
   for(int i=0; i<100; i++){
     
+    // drawing text
     fill(0);
     text("input lightness", 10, 100);
     text("perception lightness", 10, 400);
@@ -84,20 +86,26 @@ void draw(){
     // drawing percept
     ellipse(i * 8 + 50, 500 - percept[i], 5, 5);
     
-    updatePersept();
+    // update each 5 frames
+    if(frameCount % 5 == 0){
+      updatePersept();
+    }
   }  
 }
 
 void keyPressed(){
   if(keyCode==ENTER){
+    // push ENTER: swithing lightness pattern
     sgn *= -1;
     setCOCE();
     perceve();
   }
   /*else if(key==' '){
+    // push Space: update percept
     updatePersept();
   }*/
   else if((key=='q') || (key=='Q')){
+    // push 'q' or 'Q': Exit
     exit();
   }
 }
