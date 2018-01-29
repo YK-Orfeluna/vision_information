@@ -76,7 +76,7 @@ void draw(){
     text("input lightness", 10, 100);
     text("perception lightness", 10, 400);
     text("Enter: swithing lightness pattern", 10, 650);
-    text("Space: smoothing perseption lightness", 10, 700);
+    //text("Space: smoothing perseption lightness", 10, 700);
     
     // drawing input
     fill(255);
@@ -84,6 +84,8 @@ void draw(){
     
     // drawing percept
     ellipse(i * 8 + 50, 500 - percept[i], 5, 5);
+    
+    updatePersept();
   }  
 }
 
@@ -93,9 +95,9 @@ void keyPressed(){
     setCOCE();
     perceve();
   }
-  else if(key==' '){
+  /*else if(key==' '){
     updatePersept();
-  }
+  }*/
   else if((key=='q') || (key=='Q')){
     exit();
   }
